@@ -1,134 +1,592 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>www.yourwebsite.com - Page Not Found</title>
+<html>
+<head><title>
+	বাংলার যুব শক্তি
+</title><meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <style>
-        body {
-            background-color: #ffffff;
-            color: #202124;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", sans-serif;
-            font-size: 14px;
-            line-height: 1.5;
+        * {
             margin: 0;
             padding: 0;
-            display: flex;
-            justify-content: center;
+            box-sizing: border-box;
         }
 
-        .interstitial-wrapper {
-            box-sizing: border-box;
-            margin: 12vh auto 0;
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f5f6fa;
+            overflow-x: hidden;
+        }
+
+        /* ================= HEADER ================= */
+
+        .header {
+            background: white;
+            padding: 15px 40px;
+            border-bottom: 1px solid #ececec;
+        }
+
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        .logo-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+            .logo-left img {
+                height: 60px;
+            }
+
+        .govt-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1c2b5a;
+        }
+
+        .divider {
+            width: 1px;
+            height: 60px;
+            background: #d8d8d8;
+        }
+
+        .logo-right img {
+            height: 65px;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .nav {
+            background: linear-gradient(90deg,#e65100,#ff9800);
+            padding: 14px 40px;
+            box-shadow: 0 2px 10px rgba(0,0,0,.15);
+        }
+
+            .nav a {
+                color: white;
+                margin-right: 30px;
+                text-decoration: none;
+                font-weight: 600;
+                font-size: 15px;
+                transition: .3s;
+            }
+
+                .nav a:hover {
+                    opacity: .8;
+                }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            min-height: 430px;
+            padding: 40px 80px;
+            background: linear-gradient(135deg,#ff6f00,#ff9800,#ffb74d);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 60px 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .hero:before {
+                content: '';
+                position: absolute;
+                width: 550px;
+                height: 550px;
+                background: rgba(255,255,255,.10);
+                border-radius: 50%;
+                top: -180px;
+                right: -120px;
+            }
+
+            .hero:after {
+                content: '';
+                position: absolute;
+                width: 320px;
+                height: 320px;
+                background: rgba(255,255,255,.08);
+                border-radius: 50%;
+                bottom: -100px;
+                left: -80px;
+            }
+
+        .hero-content {
+            color: white;
+            z-index: 2;
             max-width: 600px;
-            padding: 0 24px;
+        }
+
+            .hero-content h1 {
+
+                font-size: 52px;
+                
+                margin-bottom: 18px;
+                font-weight: 700;
+                line-height: 1.2;
+            }
+
+            .hero-content p {
+                font-size: 24px;
+                line-height: 1.7;
+                opacity: .95;
+            }
+
+        .login-btn {
+            display: inline-block;
+            margin-top: 35px;
+            padding: 16px 36px;
+            background: white;
+            color: #e65100;
+            font-weight: 700;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: .3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,.18);
+        }
+
+            .login-btn:hover {
+                transform: translateY(-4px);
+                background: #fff3e0;
+            }
+
+        .hero-image {
+            position: relative;
+            z-index: 2;
+        }
+
+            .hero-image img {
+                height: 360px;
+                border-radius: 24px;
+                box-shadow: 0 20px 45px rgba(0,0,0,.25);
+                border: 5px solid rgba(255,255,255,.4);
+            }
+
+        /* ================= SERVICES ================= */
+
+        .services-wrapper {
+            padding: 0 70px;
+            margin-top: -70px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .services {
+            background: white;
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.12);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 30px;
+        }
+
+        .card-link {
+            text-decoration: none;
+        }
+
+        .card {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 18px;
+            text-align: center;
+            border-top: 5px solid #ff9800;
+            box-shadow: 0 8px 22px rgba(0,0,0,.10);
+            transition: .3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 18px 35px rgba(0,0,0,.16);
+            }
+
+        .card-icon {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg,#ff6f00,#ff9800);
+            color: white;
+            font-size: 36px;
+        }
+
+        .card-title {
+            margin-top: 18px;
+            font-size: 17px;
+            font-weight: 700;
+            color: #1c2b5a;
+        }
+
+        .card:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 0%;
+            height: 4px;
+            background: #ff9800;
+            transition: .3s;
+        }
+
+        .card:hover:after {
             width: 100%;
         }
 
-        .icon-container {
-            margin-bottom: 20px;
+        /* ================= NOTICE ================= */
+
+        .notice-panel {
+            margin: 60px 70px;
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 10px 25px rgba(0,0,0,.10);
+            border-left: 6px solid #ff6f00;
         }
 
-        h1 {
-            color: #202124;
-            font-size: 1.6em;
-            font-weight: 400;
-            margin: 0 0 15px;
-            line-height: 1.25;
+            .notice-panel h2 {
+                color: #e65100;
+                margin-bottom: 20px;
+                font-size: 30px;
+            }
+
+        marquee {
+            font-size: 17px;
+            line-height: 2;
+            color: #444;
         }
 
-        p {
-            color: #5f6368;
-            margin: 0 0 15px;
+        /* ================= FOOTER ================= */
+
+        .footer {
+            background: linear-gradient(90deg,#1c1c1c,#2d2d2d);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 60px;
+        }
+
+        .footer-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .footer-text {
+            margin-bottom: 10px;
             font-size: 15px;
-            line-height: 1.54;
         }
 
-        .error-code {
-            color: #70757a;
-            font-size: 12px;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            letter-spacing: 0.5px;
-        }
-
-        .button-container {
-            margin-top: 30px;
-        }
-
-        .blue-button {
-            background-color: #1a73e8;
-            border: none;
-            border-radius: 4px;
-            color: #ffffff;
-            cursor: pointer;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 500;
-            padding: 8px 16px;
+        .footer a {
+            color: #ffb74d;
             text-decoration: none;
-            display: inline-block;
-            transition: background-color 0.2s, box-shadow 0.2s;
         }
 
-        .blue-button:hover {
-            background-color: #1b66c9;
-            box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+        /* ================= MOBILE RESPONSIVE ================= */
+
+        @media screen and (max-width: 1100px) {
+
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 70px 30px;
+            }
+
+            .hero-content {
+                max-width: 100%;
+            }
+
+            .hero-image {
+                margin-top: 40px;
+            }
+
+                .hero-image img {
+                    height: 380px;
+                }
+
+            .service-grid {
+                grid-template-columns: repeat(2,1fr);
+            }
         }
 
-        /* Dark mode support - just like Chrome */
-        @media (prefers-color-scheme: dark) {
-            body {
-                background-color: #202124;
-                color: #e8eaed;
+        @media screen and (max-width: 768px) {
+
+            .header {
+                padding: 15px 20px;
             }
-            h1 {
-                color: #e8eaed;
+
+            .logo-wrapper {
+                flex-direction: column;
+                gap: 15px;
             }
-            p {
-                color: #9aa0a6;
+
+            .divider {
+                display: none;
             }
-            .error-code {
-                color: #9aa0a6;
+
+            .govt-text {
+                font-size: 22px;
             }
-            .blue-button {
-                background-color: #8ab4f8;
-                color: #202124;
+
+            .nav {
+                padding: 14px 20px;
             }
-            .blue-button:hover {
-                background-color: #aecbfa;
+
+                .nav a {
+                    display: inline-block;
+                    margin-bottom: 10px;
+                }
+
+            .hero {
+                padding: 60px 20px;
+                min-height: auto;
             }
+
+            .hero-content h1 {
+                font-size: 42px;
+            }
+
+            .hero-content p {
+                font-size: 18px;
+            }
+
+            .hero-image img {
+                width: 100%;
+                height: auto;
+                max-width: 320px;
+            }
+
+            .services-wrapper {
+                padding: 0 20px;
+                margin-top: -40px;
+            }
+
+            .services {
+                padding: 30px 20px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notice-panel {
+                margin: 40px 20px;
+                padding: 25px;
+            }
+
+                .notice-panel h2 {
+                    font-size: 24px;
+                }
         }
     </style>
+
 </head>
+
 <body>
 
-    <div class="interstitial-wrapper">
-        <!-- Chrome's Sad Document SVG Icon -->
-        <div class="icon-container">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="56" height="56">
-                <!-- Document body -->
-                <path d="M12 4C9.8 4 8 5.8 8 8V40C8 42.2 9.8 44 12 44H36C38.2 44 40 42.2 40 40V16L28 4H12Z" fill="#F1F3F4" stroke="#DADCE0" stroke-width="2"/>
-                <!-- Folded corner -->
-                <path d="M28 4V16H40" fill="none" stroke="#DADCE0" stroke-width="2" stroke-linejoin="round"/>
-                <!-- Eyes -->
-                <circle cx="19" cy="25" r="2" fill="#80868B"/>
-                <circle cx="29" cy="25" r="2" fill="#80868B"/>
-                <!-- Sad mouth -->
-                <path d="M19 33C19 33 22 29 24 29C26 29 29 33 29 33" fill="none" stroke="#80868B" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+    <!-- ================= HEADER ================= -->
+
+    <div class="header">
+
+        <div class="logo-wrapper">
+
+            <div class="logo-left">
+
+                <img src="https://yubasathi.wb.gov.in/Images/Logo_wb.png" />
+
+                <span class="govt-text">Government of West Bengal
+                </span>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="logo-right">
+                <img src="https://yubasathi.wb.gov.in/Public/Images/bys.png" />
+            </div>
+
         </div>
 
-        <h1>This page can't be found</h1>
-        
-        <p>The webpage you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
-        
-        <div class="error-code">HTTP_ERROR_404_NOT_FOUND</div>
-        
-        <div class="button-container">
-            <a href="/" class="blue-button">Go back</a>
+    </div>
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <div class="nav">
+
+        <a href="https://yubasathi.wb.gov.in/Default.aspx">Home</a>
+
+        <a href="https://yubasathi.wb.gov.in/bysadmin/Page/BYS_Admin_Login.aspx">Official Login
+        </a>
+
+    </div>
+
+    <!-- ================= HERO SECTION ================= -->
+
+    <div class="hero">
+
+        <div class="hero-content">
+
+            <h1>বাংলার যুব শক্তি</h1>
+
+            <p>
+                Department of Youth Services & Sports<br />
+                Government of West Bengal
+            </p>
+
+            <a href="https://yubasathi.wb.gov.in/bysadmin/Page/BYS_Admin_Login.aspx"
+                class="login-btn">Official Login
+
+            </a>
+
         </div>
+
+        <div class="hero-image">
+
+            <!-- CM IMAGE -->
+
+            <img src="https://yubasathi.wb.gov.in/Images/cm_new2.jpg" />
+
+        </div>
+
+    </div>
+
+    <!-- ================= SERVICES ================= -->
+
+    <div class="services-wrapper">
+
+        <div class="services">
+
+            <div class="service-grid">
+
+                <a href="https://yubasathi.wb.gov.in/public/bys/BYS_Closed.aspx" class="card-link">
+
+                    <div class="card">
+
+                        <div class="card-icon">📄</div>
+
+                        <div class="card-title">
+                            Application Submission
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <a href="https://yubasathi.wb.gov.in/public/bys/bys_quick_tips.aspx"
+                    class="card-link">
+
+                    <div class="card">
+
+                        <div class="card-icon">🔍</div>
+
+                        <div class="card-title">
+                            Application Status
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <a href="https://yubasathi.wb.gov.in/public/bys/BYS_Closed.aspx"
+                    class="card-link">
+
+                    <div class="card">
+
+                        <div class="card-icon">📢</div>
+
+                        <div class="card-title">
+                            Public Notices
+                        </div>
+
+                    </div>
+
+                </a>
+
+                <a href="https://yubasathi.wb.gov.in/bysadmin/Page/BYS_Admin_Login.aspx"
+                    class="card-link">
+
+                    <div class="card">
+
+                        <div class="card-icon">📊</div>
+
+                        <div class="card-title">
+                            Department Reports
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ================= NOTICE ================= -->
+
+    <div class="notice-panel">
+
+        <h2>Important Announcements</h2>
+
+        <marquee direction="up"
+            scrollamount="3"
+            height="180">
+            • The online application submission period for this scheme has officially ended.
+            <br />
+            <br />
+
+            • For Assistance / Query, please contact
+            Yuba Sathi Help Desk:
+
+            📞 6292248888
+
+            ✉ yubashakti2026@gmail.com
+
+        </marquee>
+
+    </div>
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+
+        <div class="footer-title">
+            Banglar Yuba Shakti Help Desk
+        </div>
+
+        <div class="footer-text">
+            📞 Help Desk No : <b>6292248888</b>
+        </div>
+
+        <div class="footer-text">
+            ✉ Email :
+
+            <a href="mailto:yubasathi2026@gmail.com">yubashakti2026@gmail.com
+            </a>
+
+        </div>
+
+        <div style="margin-top: 20px; font-size: 13px; opacity: .8;">
+            © 2026
+            Government of West Bengal |
+            Department of Youth Services & Sports
+
+        </div>
+
     </div>
 
 </body>
 </html>
+
