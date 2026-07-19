@@ -1,316 +1,370 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="scroll-behavior: smooth;" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#051119">
-    <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="https://i.ibb.co/HfP6ZSTH/f4f7eb0d-d753-4066-9b9b-4a7a09bab50c-removalai-preview.png">
+    <title>System Maintenance - Career Guidance Academy (CGA)</title>
     
-    <title>System Maintenance - CGA Unified Portal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap'); 
 
-        /* --- SCREEN & TOUCH PROTECTION CSS --- */
-        body {
-            -webkit-touch-callout: none; -webkit-user-select: none; -khtml-user-select: none;
-            -moz-user-select: none; -ms-user-select: none; user-select: none;
-            -webkit-tap-highlight-color: transparent; /* Removes blue tap highlight on Android */
+        /* =========================================================
+           DYNAMIC THEME VARIABLES (LIGHT & DARK MODE)
+           ========================================================= */
+        :root {
+            --primary-blue: #0e5670;
+            --primary-dark: #093748;
+            --deep-yellow: #ffc107;
+            --deep-yellow-hover: #e0a800;
+            
+            /* Light Theme Defaults */
+            --bg-body: #f8f9fa;
+            --bg-surface: #ffffff;
+            --bg-alt: #f1f5f9;
+            --bg-hero: #e0f2fe;
+            
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            
+            --heading-color: #0e5670;
+            --highlight-red: #b91c1c;
+            --nav-bg: #ffffff;
+            --card-shadow: rgba(0,0,0,0.05);
         }
-        img {
-            -webkit-user-drag: none; -khtml-user-drag: none; -moz-user-drag: none; -o-user-drag: none; user-drag: none; pointer-events: none;
+
+        [data-theme="dark"] {
+            /* Dark Theme Overrides */
+            --bg-body: #0f172a;
+            --bg-surface: #1e293b;
+            --bg-alt: #334155;
+            --bg-hero: #0f172a;
+            
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #475569;
+            
+            --heading-color: #7dd3fc;
+            --highlight-red: #f87171;
+            --nav-bg: #1e293b;
+            --card-shadow: rgba(0,0,0,0.3);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; }
+        html { font-size: 100%; transition: font-size 0.3s ease; }
 
-        /* --- PREMIUM DARK BACKGROUND --- */
         body {
-            background-color: #051119;
-            background-image: radial-gradient(circle at 50% -20%, #175d85 0%, #051119 80%);
-            background-attachment: fixed;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            margin: 0; padding: 0;
             overflow-x: hidden;
-            color: #ffffff;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* --- GLASSMORPHISM CONTAINER (RESPONSIVE) --- */
-        .box-container {
-            background: rgba(255, 255, 255, 0.025);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-top: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 24px;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), inset 0 0 0 1px rgba(255,255,255,0.02);
-            z-index: 10; 
-            width: 100%;
-            max-width: 550px;
-            padding: 50px 40px;
-            text-align: center;
-            animation: fadeUp 0.8s ease-out forwards;
+        /* Top Bar & Accessibility */
+        .top-bar { background-color: var(--primary-dark); color: #ffffff; padding: 6px 0; border-bottom: 2px solid var(--deep-yellow); font-size: 12.5px; }
+        .top-bar a { color: #ffffff; text-decoration: none; transition: 0.3s; }
+        .top-bar a:hover { color: var(--deep-yellow); }
+        .text-sizer { 
+            background: #334155; color: #fff; border: 1px solid #475569; padding: 3px 12px; 
+            margin-left: 5px; font-size: 12px; cursor: pointer; border-radius: 4px; transition: 0.2s; font-weight: bold;
         }
+        .text-sizer:hover { background: var(--deep-yellow); color: #000; border-color: var(--deep-yellow);}
+        .theme-toggle-btn { background: var(--deep-yellow); color: #000; border-color: var(--deep-yellow); }
 
-        @keyframes fadeUp { 
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); } 
+        /* Main Navigation */
+        .navbar { border-bottom: 1px solid var(--border-color); background: var(--nav-bg); padding: 15px 0; transition: 0.3s;}
+        .navbar-brand img { height: 65px; margin-right: 15px; }
+        .navbar-brand h1 { font-size: 26px; font-weight: 700; color: var(--heading-color); margin: 0; line-height: 1.2; letter-spacing: 0.5px;}
+        .navbar-brand p { font-size: 11.5px; font-weight: 600; color: var(--text-muted); margin: 0; letter-spacing: 1.5px;}
+        
+        /* Buttons & Pulsing */
+        .btn-deep-yellow {
+            background-color: var(--deep-yellow); color: #000 !important; font-weight: 700; border: 2px solid var(--deep-yellow); transition: all 0.3s ease;
         }
-
-        .login-logo { 
-            height: clamp(70px, 10vw, 90px); 
-            margin-bottom: 20px; 
-            object-fit: contain; 
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5)); 
+        .btn-deep-yellow:hover { background-color: var(--deep-yellow-hover); border-color: var(--deep-yellow-hover); color: #000; }
+        
+        /* =========================================================
+           MAINTENANCE SECTION CUSTOM STYLES
+           ========================================================= */
+        .maintenance-wrapper {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 60px 20px;
+            background: var(--bg-hero);
+            position: relative;
+            overflow: hidden;
         }
         
-        /* --- MAINTENANCE HEADER --- */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 170, 0, 0.1);
-            border: 1px solid rgba(255, 170, 0, 0.3);
-            color: #ffaa00;
-            padding: 6px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
+        /* Background subtle pattern/gears */
+        .maintenance-bg-icon {
+            position: absolute;
+            font-size: 300px;
+            color: var(--primary-blue);
+            opacity: 0.03;
+            z-index: 0;
+            top: -50px;
+            right: -50px;
+            animation: spin-slow 20s linear infinite;
+        }
+        .maintenance-bg-icon-2 {
+            position: absolute;
+            font-size: 200px;
+            color: var(--primary-blue);
+            opacity: 0.03;
+            z-index: 0;
+            bottom: -50px;
+            left: -50px;
+            animation: spin-slow-reverse 15s linear infinite;
+        }
+        
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+        @keyframes spin-slow-reverse { 100% { transform: rotate(-360deg); } }
+
+        .maintenance-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-top: 5px solid var(--highlight-red);
+            border-radius: 12px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 35px var(--card-shadow);
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gear-container {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+        }
+        
+        .gear-icon {
+            font-size: 60px;
+            color: var(--primary-blue);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .gear-1 { margin-top: -15px; margin-left: -15px; font-size: 70px; animation: spin-slow 4s linear infinite; }
+        .gear-2 { margin-top: 20px; margin-left: 20px; font-size: 45px; color: var(--deep-yellow); animation: spin-slow-reverse 3s linear infinite; }
+
+        .maintenance-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--highlight-red);
             margin-bottom: 15px;
             letter-spacing: 0.5px;
         }
-        .pulse-dot {
-            width: 8px; height: 8px; background-color: #ffaa00;
-            border-radius: 50%; margin-right: 8px;
-            box-shadow: 0 0 10px #ffaa00;
-            animation: pulse 1.5s infinite alternate;
-        }
-        @keyframes pulse {
-            0% { opacity: 0.4; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
+
+        .maintenance-desc {
+            font-size: 15px;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 30px;
         }
 
-        .box-container h2 { font-size: clamp(20px, 5vw, 26px); margin-bottom: 10px; font-weight: 600; letter-spacing: 0.5px;}
-        .box-container p.subtext { color: rgba(255,255,255,0.6); font-size: clamp(13px, 3.5vw, 15px); line-height: 1.6;}
-
-        .divider { width: 100%; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent); margin: 30px 0; }
-
-        /* --- PROFESSIONAL GAME UI --- */
-        .game-title { font-size: 15px; font-weight: 500; color: #33a1dd; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;}
-        
-        .board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: clamp(8px, 2vw, 12px);
+        .progress-container {
+            background: var(--bg-body);
+            border: 1px solid var(--border-color);
+            border-radius: 30px;
+            height: 8px;
             width: 100%;
-            max-width: 320px;
-            margin: 0 auto 25px auto;
+            max-width: 400px;
+            margin: 0 auto 30px;
+            overflow: hidden;
+            position: relative;
         }
-
-        .cell {
-            aspect-ratio: 1;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: clamp(35px, 8vw, 45px);
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: inset 0 4px 10px rgba(0,0,0,0.3);
-            touch-action: manipulation; /* Prevents double-tap zoom on Android */
-        }
-
-        .cell:hover {
-            background: rgba(51, 161, 221, 0.1);
-            border-color: rgba(51, 161, 221, 0.4);
-        }
-        .cell:active { transform: scale(0.95); }
-
-        .status { 
-            font-size: clamp(16px, 4vw, 18px); 
-            font-weight: 600; 
-            margin-bottom: 25px; 
-            height: 26px; 
-            color: #fff;
-            transition: all 0.3s;
-        }
-
-        .btn-restart {
-            width: 100%; padding: 16px; border: none; border-radius: 12px; 
-            background: linear-gradient(135deg, #33a1dd, #175d85); color: white; 
-            font-size: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; 
-            box-shadow: 0 8px 20px rgba(51, 161, 221, 0.3);
-            letter-spacing: 0.5px;
-        }
-        .btn-restart:hover { box-shadow: 0 8px 25px rgba(51, 161, 221, 0.5); transform: translateY(-2px);}
-        .btn-restart:active { transform: translateY(1px); box-shadow: 0 4px 10px rgba(51, 161, 221, 0.3);}
-
-        /* --- FOOTER --- */
-        .page-footer { position: fixed; bottom: 15px; left: 0; width: 100%; text-align: center; color: rgba(255, 255, 255, 0.3); font-size: 11px; line-height: 1.6; z-index: 5; letter-spacing: 0.5px; }
-        .page-footer .creator-name { color: #33a1dd; font-weight: 600; }
         
-        /* Utility Colors for X and O */
-        .player-x { color: #33a1dd; text-shadow: 0 0 20px rgba(51, 161, 221, 0.7); }
-        .player-o { color: #ff4d4d; text-shadow: 0 0 20px rgba(255, 77, 77, 0.7); }
-        .win-cell { background: rgba(51, 161, 221, 0.2) !important; border-color: #33a1dd !important; transform: scale(1.05); z-index: 2;}
+        .progress-bar-custom {
+            height: 100%;
+            background: linear-gradient(90deg, var(--highlight-red), var(--primary-blue));
+            width: 50%; /* Fake progress */
+            border-radius: 30px;
+            animation: loading-bar 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes loading-bar {
+            0% { width: 30%; }
+            100% { width: 70%; }
+        }
 
-        /* --- MEDIA QUERIES FOR MOBILE (ANDROID) --- */
-        @media (max-width: 480px) {
-            .box-container { padding: 40px 20px; border-radius: 20px;}
-            body { padding: 15px; align-items: flex-start; padding-top: 5vh;}
-            .page-footer { position: relative; bottom: 0; margin-top: 30px; }
+        .contact-box {
+            background: var(--bg-alt);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            display: inline-block;
+            font-size: 13.5px;
+            color: var(--text-main);
+        }
+
+        /* PROFESSIONAL FOOTER CSS */
+        .public-footer { background: var(--primary-dark); color: #ffffff; padding: 40px 0 20px; font-size: 14px; border-top: 5px solid var(--deep-yellow);}
+        .copyright-bar { border-top: 1px solid rgba(255,255,255,0.1); margin-top: 20px; padding-top: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; color: #94a3b8; font-size: 13px; }
+        .copyright-bar a { color: var(--deep-yellow); text-decoration: none; font-weight: 600; transition: 0.3s;}
+        
+        @media screen and (max-width: 768px) {
+            .copyright-bar { flex-direction: column; text-align: center; gap: 10px; }
+            .maintenance-card { padding: 40px 20px; border-top-width: 4px; }
+            .maintenance-title { font-size: 26px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- MAINTENANCE SCREEN -->
-    <div class="box-container">
-        <img src="https://i.ibb.co/HfP6ZSTH/f4f7eb0d-d753-4066-9b9b-4a7a09bab50c-removalai-preview.png" alt="Logo" class="login-logo" crossorigin="anonymous">
-        
-        <div>
-            <div class="status-badge"><div class="pulse-dot"></div>Maintenance Mode</div>
+    <!-- Top Contact & Accessibility Bar -->
+    <div class="top-bar">
+        <div class="container d-flex justify-content-between align-items-center flex-wrap">
+            <div class="d-flex align-items-center gap-3">
+                <span><i class="fa fa-envelope me-1" style="color:var(--deep-yellow);"></i> cgaclasses@gmail.com</span>
+                <span><i class="fa fa-phone me-1" style="color:var(--deep-yellow);"></i> +91-9733445353</span>
+            </div>
+            <!-- Text Zoom & Theme Controls -->
+            <div class="d-flex align-items-center">
+                <span class="me-2 d-none d-md-inline text-light">Text Size:</span>
+                <button class="text-sizer" onclick="setTextSize('decrease')" title="Decrease Font Size">A-</button>
+                <button class="text-sizer" onclick="setTextSize('normal')" title="Normal Font Size">A</button>
+                <button class="text-sizer" onclick="setTextSize('increase')" title="Increase Font Size">A+</button>
+                <span class="mx-2 text-secondary">|</span>
+                <!-- Theme Toggle Button -->
+                <button class="text-sizer theme-toggle-btn" id="themeToggle" title="Toggle Dark/Light Mode">
+                    <i class="fa fa-moon text-dark"></i>
+                </button>
+            </div>
         </div>
-        
-        <h2>System Upgradation</h2>
-        <p class="subtext">We are optimizing the CGA Unified Portal servers for a faster and smoother experience. We will be back online shortly.</p>
-        
-        <div class="divider"></div>
-
-        <div class="game-title">Unwind while you wait</div>
-        
-        <div class="board" id="board">
-            <div class="cell" data-index="0"></div>
-            <div class="cell" data-index="1"></div>
-            <div class="cell" data-index="2"></div>
-            <div class="cell" data-index="3"></div>
-            <div class="cell" data-index="4"></div>
-            <div class="cell" data-index="5"></div>
-            <div class="cell" data-index="6"></div>
-            <div class="cell" data-index="7"></div>
-            <div class="cell" data-index="8"></div>
-        </div>
-
-        <div class="status" id="status">Player <span class="player-x">X's</span> Turn</div>
-
-        <button class="btn-restart" onclick="restartGame()">Restart Game</button>
     </div>
 
-    <!-- FOOTER -->
-    <div class="page-footer">
-        Portal Developed by <span class="creator-name">GOURAB LAYAK</span><br>
-        Nexus Infotech Private Limited, Asansol, WB
-    </div>
+    <!-- Main Navigation Header -->
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+        <div class="container d-flex justify-content-center justify-content-lg-start">
+            <a class="navbar-brand d-flex align-items-center m-0" href="#">
+                <img src="https://i.ibb.co/HfP6ZSTH/f4f7eb0d-d753-4066-9b9b-4a7a09bab50c-removalai-preview.png" alt="CGA Logo" crossorigin="anonymous">
+                <div>
+                    <h1>CAREER GUIDANCE ACADEMY</h1>
+                    <p>AN ISO 9001:2015 CERTIFIED INSTITUTION</p>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Maintenance Section -->
+    <main class="maintenance-wrapper">
+        <!-- Decorative Background Elements -->
+        <i class="fa fa-cog maintenance-bg-icon"></i>
+        <i class="fa fa-cog maintenance-bg-icon-2"></i>
+
+        <div class="maintenance-card">
+            <div class="gear-container">
+                <i class="fa fa-cog gear-icon gear-1"></i>
+                <i class="fa fa-cog gear-icon gear-2"></i>
+            </div>
+            
+            <h2 class="maintenance-title">System Under Maintenance</h2>
+            
+            <p class="maintenance-desc">
+                We are currently upgrading our systems and performing scheduled maintenance to provide you with a smoother and more secure experience. <b>The student portal and admission services will be back online shortly.</b>
+            </p>
+            
+            <div class="progress-container">
+                <div class="progress-bar-custom"></div>
+            </div>
+            
+            <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 25px; font-weight: 500;">
+                Estimated completion time: <strong>2 Hours</strong>
+            </p>
+            
+            <div class="contact-box">
+                <i class="fa fa-info-circle me-2" style="color: var(--primary-blue);"></i>
+                For urgent inquiries, please contact administration:<br>
+                <a href="tel:+919733445353" style="color: var(--heading-color); font-weight: 600; text-decoration: none; margin-top: 5px; display: inline-block;">
+                    <i class="fa fa-phone-alt me-1"></i> +91 9733445353
+                </a>
+            </div>
+            
+            <div class="mt-4 pt-4 border-top" style="border-color: var(--border-color) !important;">
+                <button class="btn btn-deep-yellow px-4 py-2 rounded-pill shadow-sm" onclick="location.reload();">
+                    <i class="fa fa-sync-alt me-2"></i> Refresh Page
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- PROFESSIONAL FOOTER -->
+    <footer class="public-footer">
+        <div class="container text-center">
+            <img src="https://i.ibb.co/HfP6ZSTH/f4f7eb0d-d753-4066-9b9b-4a7a09bab50c-removalai-preview.png" alt="CGA Logo" style="height: 55px; margin-bottom: 15px;" crossorigin="anonymous">
+            <h5 style="border:none; padding:0; margin-bottom:12px; color:#fff;">Career Guidance Academy</h5>
+            <p style="color: #cbd5e1; font-size: 13.5px; max-width: 600px; margin: 0 auto;">An ISO 9001:2015 Certified Educational Institution dedicated to empowering students with advanced technical and professional education.</p>
+            
+            <!-- Bottom Copyright Bar -->
+            <div class="copyright-bar justify-content-center">
+                <div class="text-center">
+                    &copy; 2026 <strong style="color:#fff;">Career Guidance Academy</strong>. All Rights Reserved.<br>
+                    <span style="font-size: 12px; margin-top: 5px; display: block;">Portal Designed & Developed by <a href="#">GOURAB LAYAK</a> | Nexus Infotech Pvt Ltd</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        /* --- SCREEN PROTECTION JS --- */
-        document.addEventListener('contextmenu', event => event.preventDefault()); 
-        document.addEventListener('dragstart', event => event.preventDefault());   
-        document.addEventListener('copy', event => event.preventDefault());        
-        document.addEventListener('cut', event => event.preventDefault());         
-        document.addEventListener('paste', event => event.preventDefault());       
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === 'i')) {
-                e.preventDefault();
+        /* ========================================================
+           LIGHT / DARK THEME TOGGLE
+           ======================================================== */
+        const themeToggle = document.getElementById('themeToggle');
+        const icon = themeToggle.querySelector('i');
+        
+        const savedTheme = localStorage.getItem('cga_theme');
+        if (savedTheme) {
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            if (savedTheme === 'dark') {
+                icon.classList.replace('fa-moon', 'fa-sun');
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('cga_theme', 'light');
+                icon.classList.replace('fa-sun', 'fa-moon');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('cga_theme', 'dark');
+                icon.classList.replace('fa-moon', 'fa-sun');
             }
         });
 
-        /* --- TIC-TAC-TOE GAME LOGIC --- */
-        let boardState = ["", "", "", "", "", "", "", "", ""];
-        let currentPlayer = "X";
-        let gameActive = true;
-
-        const winningConditions = [
-            [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-            [0, 3, 6], [1, 4, 7], [2, 5, 8], // Cols
-            [0, 4, 8], [2, 4, 6]             // Diagonals
-        ];
-
-        const cells = document.querySelectorAll('.cell');
-        const statusText = document.getElementById('status');
-
-        cells.forEach(cell => cell.addEventListener('click', handleCellClick));
-
-        // Function for Android Haptic Feedback
-        function triggerVibration(duration) {
-            if (navigator.vibrate) {
-                navigator.vibrate(duration);
-            }
-        }
-
-        function handleCellClick(event) {
-            const clickedCell = event.target;
-            const cellIndex = parseInt(clickedCell.getAttribute('data-index'));
-
-            if (boardState[cellIndex] !== "" || !gameActive) return;
-
-            // Vibrate slightly on tap (Android)
-            triggerVibration(40);
-
-            boardState[cellIndex] = currentPlayer;
-            clickedCell.innerText = currentPlayer;
+        /* ========================================================
+           ACCESSIBILITY TEXT SIZER
+           ======================================================== */
+        let currentZoom = 100;
+        function setTextSize(action) {
+            if(action === 'increase' && currentZoom < 120) currentZoom += 5;
+            else if(action === 'decrease' && currentZoom > 90) currentZoom -= 5;
+            else if(action === 'normal') currentZoom = 100;
             
-            // Add Glow Class based on player
-            if(currentPlayer === 'X') {
-                clickedCell.classList.add('player-x');
-            } else {
-                clickedCell.classList.add('player-o');
-            }
-
-            checkWin();
-        }
-
-        function checkWin() {
-            let roundWon = false;
-            let winningCells = [];
-
-            for (let i = 0; i < winningConditions.length; i++) {
-                const [a, b, c] = winningConditions[i];
-                if (boardState[a] && boardState[a] === boardState[b] && boardState[a] === boardState[c]) {
-                    roundWon = true;
-                    winningCells = [a, b, c];
-                    break;
-                }
-            }
-
-            if (roundWon) {
-                statusText.innerHTML = `🏆 Player <span class="${currentPlayer === 'X' ? 'player-x' : 'player-o'}">${currentPlayer}</span> Wins!`;
-                gameActive = false;
-                
-                // Highlight winning cells & Vibrate longer
-                triggerVibration([100, 50, 100]);
-                winningCells.forEach(index => {
-                    cells[index].classList.add('win-cell');
-                });
-                return;
-            }
-
-            if (!boardState.includes("")) {
-                statusText.innerHTML = "🤝 It's a Draw!";
-                gameActive = false;
-                triggerVibration(150);
-                return;
-            }
-
-            currentPlayer = currentPlayer === "X" ? "O" : "X";
-            statusText.innerHTML = `Player <span class="${currentPlayer === 'X' ? 'player-x' : 'player-o'}">${currentPlayer}'s</span> Turn`;
-        }
-
-        function restartGame() {
-            triggerVibration(50);
-            boardState = ["", "", "", "", "", "", "", "", ""];
-            currentPlayer = "X";
-            gameActive = true;
-            statusText.innerHTML = `Player <span class="player-x">X's</span> Turn`;
-            
-            cells.forEach(cell => {
-                cell.innerText = "";
-                cell.classList.remove('player-x', 'player-o', 'win-cell');
-            });
+            document.documentElement.style.fontSize = currentZoom + "%";
         }
     </script>
 </body>
